@@ -29,54 +29,53 @@
                 </MenuItem>
             </Menu>
             <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Width="Auto" Background="LightCyan">
-                <Button x:Name="RECButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="REC" Click="EquipmentButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image x:Name="RECImage" Source="resources/REC.png" Width="50" Height="50"  />
-                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">REC unit</TextBlock>
+                <Button x:Name="RECButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="REC" Click="EquipmentButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <Image x:Name="RECImage" Grid.Column="0" Source="resources/REC.png" Width="50" Height="50"  />
+                        <TextBlock VerticalAlignment="Center" Grid.Column="2" Margin="10,0,0,0">REC unit</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="SwitchButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Switch" Click="EquipmentButton_Click">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button x:Name="SwitchButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Switch" Click="EquipmentButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
                         <Image x:Name="SwitchImage" Source="resources/switch.png" Width="50" Height="50"/>
                         <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Switch</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="REButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="RE" Click="EquipmentButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image x:Name="REImage" Source="resources/RE.png" Width="50" Height="50"  />
+                <Button x:Name="REButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="RE" Click="EquipmentButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <Image x:Name="REImage" Source="resources/RE.png" Width="50" Height="50"/>
                         <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">RE unit</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="ConnectorButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Connector" Click="ConnectionButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="resources/connector.png" Width="50" Height="50"  />
-                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">CPRI connection</TextBlock>
+                <Button x:Name="ConnectorButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Connector" Click="ConnectionButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <Image Source="resources/connector.png" Width="50" Height="50"/>
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Connection</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="CellButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Cell" Click="EquipmentButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="resources/cell.png" Width="50" Height="50"  />
+                <Button x:Name="CellButton" BorderThickness="0,1,0,0" Cursor="Hand" Tag="Cell" Click="EquipmentButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <Image Source="resources/cell.png" Width="50" Height="50"/>
                         <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Cell</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="CloudButton" BorderThickness="0,1,0,1" Cursor="Hand" Tag="Cloud" Click="EquipmentButton_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="resources/cloud.png" Width="50" Height="50"  />
+                <Button x:Name="CloudButton" BorderThickness="0,1,0,1" Cursor="Hand" Tag="Cloud" Click="EquipmentButton_Click" HorizontalContentAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                        <Image Source="resources/cloud.png" Width="50" Height="50"/>
                         <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Core network</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <Border BorderThickness="1,1,0,0" BorderBrush="Black" Opacity="0.5">
-                <Canvas Name="CanvasMain" 
-                      Background="Transparent" 
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                      Width="Auto" Height="Auto" Margin="0,0,0,22" MinHeight="400" MinWidth="500"
+            <Border BorderThickness="1,1,0,0" BorderBrush="Black" Opacity="1">
+                <Canvas Name="CanvasMain" Background="Transparent"  
+                      Width="Auto" Height="Auto" Margin="0,0,0,0" MinHeight="400" MinWidth="500"
                       PreviewMouseLeftButtonUp="CanvasMain_PreviewMouseLeftButtonUp" 
                       PreviewMouseMove="CanvasMain_PreviewMouseMove" 
                       MouseLeftButtonDown="CanvasMain_MouseLeftButtonDown">
+                    
                     <Canvas.Resources>
                         <local:ElementTypeIconConverter x:Key="IconConverter"/>
-                        <clr:Double x:Key="elementImgDimensions">50</clr:Double>
+                        <clr:Double x:Key="elementImgDimensions">60</clr:Double>
                     </Canvas.Resources>
 
                     <ItemsControl Margin="10" ItemsSource="{Binding ElementConnectionViewModels}">
@@ -91,7 +90,7 @@
                                       X2="{Binding Path=PosX2}" Y2="{Binding Path=PosY2}"
                                       Cursor="Hand"
                                       PreviewMouseLeftButtonDown="ElementConnection_PreviewMouseLeftButtonDown"
-                                      Stroke="Blue" StrokeThickness="5"/>
+                                      Stroke="PaleVioletRed" StrokeThickness="4"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -107,7 +106,7 @@
                                       X2="{Binding Path=PosX2}" Y2="{Binding Path=PosY2}"
                                       Cursor="Hand"
                                       PreviewMouseLeftButtonDown="CloudConnection_PreviewMouseLeftButtonDown"
-                                      Stroke="Blue" StrokeThickness="5"/>
+                                      Stroke="LightGray" StrokeThickness="3" StrokeDashArray="3"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -123,7 +122,7 @@
                                       X2="{Binding Path=PosX2}" Y2="{Binding Path=PosY2}"
                                       Cursor="Hand"
                                       PreviewMouseLeftButtonDown="CellConnection_PreviewMouseLeftButtonDown"
-                                      Stroke="Blue" StrokeThickness="5"/>
+                                      Stroke="LightBlue" StrokeThickness="3" StrokeDashArray="3" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -161,27 +160,11 @@
                             <DataTemplate>
                                 <Grid Cursor="Hand" Background="Transparent"
                                       PreviewMouseLeftButtonDown="CellImage_PreviewMouseLeftButtonDown">
-                                    <Image Height="80"
-                                           Width="80"
-                                           Source="resources/Cell.png"/>
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                                        <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               Text="{Binding Path=Cell.Name}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               Text="{Binding Path=Cell.RatType}"/>
-                                            <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               Text=" - "/>
-                                            <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               Text="{Binding Path=Cell.Bandwidth}"/>
-                                        </StackPanel>
-                                        <TextBlock HorizontalAlignment="Center" 
-                                               VerticalAlignment="Center"
-                                               Text="{Binding Path=Cell.State}"/>
+
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                                        <Image Height="50" Width="50" Source="resources/Cell.png" HorizontalAlignment="Left" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=Cell.Name}"/>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Path=Cell.State}"/>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
@@ -207,7 +190,8 @@
                                             PreviewMouseLeftButtonDown="ElementImage_PreviewMouseLeftButtonDown">
                                     <Image Height="{StaticResource ResourceKey=elementImgDimensions}"
                                            Width="{StaticResource ResourceKey=elementImgDimensions}" 
-                                           Source="{Binding Element.Type, Converter={StaticResource IconConverter}}"/>
+                                           Source="{Binding Element.Type, Converter={StaticResource IconConverter}}"
+                                           Opacity="1"/>
                                     <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Element.Name}"/>
                                 </StackPanel>
                             </DataTemplate>

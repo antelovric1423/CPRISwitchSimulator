@@ -429,8 +429,8 @@ namespace CPRISwitchSimulator
         private PositionedComponent pickedVM;
         private bool draggingPickedElement;
         private Point dragOffset;
-        private readonly double elementImgDimensions = 50;
-        private readonly double cellImgDimensions = 80;
+        private readonly double elementImgDimensions = 60;
+        private readonly double cellImgDimensions = 50;
         private readonly double cloudImgDimensions = 80;
     }
 }

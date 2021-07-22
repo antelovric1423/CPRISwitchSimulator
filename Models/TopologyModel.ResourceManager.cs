@@ -18,22 +18,23 @@ namespace CPRISwitchSimulator
             public static void DeallocateCellResources(Cell cell)
             {
                 Console.WriteLine("DeallocateCellResources() cell: " + cell.Id);
-                if (cell.State != CellState.ALLOCATED)
+                if (cell.State != CellState.ENABLED)
                     return;
 
-                GetAllocatedPath(cell).ForEach(pathCapacity =>
+                GetAllocatedPath(cell).ForEach((Action<Capacity>)(pathCapacity =>
                 {
                     pathCapacity.Deallocate(cell.Id);
-                    cell.State = CellState.NOT_ATTACHED;
-                });
+                    cell.State = CellState.DISABLED;
+                }));
             }
             public static void AllocateCellResources(Cell cell)
             {
                 Console.WriteLine("AllocateCellResources() cell: " + cell.Id);
-                List<(Capacity, uint)> shortestCapacityPath = GetShortestPathToRec(cell);
+                List<(Capacity, uint)> shortestCapacityPath = GetShortestPathToRec(cell, out string ErrorMessage);
                 if (shortestCapacityPath == null)
                 {
-                    cell.State = CellState.ALLOCATION_FAILED;
+                    cell.State = CellState.DISABLED;
+                    cell.ErrorMessage = ErrorMessage;
                     return;
                 }
                 Console.WriteLine("--");
@@ -48,13 +49,14 @@ namespace CPRISwitchSimulator
                 }
 
                 Console.WriteLine("--");
-                cell.State = CellState.ALLOCATED;
+                cell.State = CellState.ENABLED;
+                cell.ErrorMessage = null;
             }
             private static void AllocateNonAllocatedCells(List<Cell> cells)
             {
                 foreach (Cell cell in cells)
                 {
-                    if (cell.AttachedElement == null || cell.State == CellState.ALLOCATED)
+                    if (cell.AttachedElement == null || cell.State == CellState.ENABLED)
                         return;
 
                     AllocateCellResources(cell);
@@ -106,11 +108,12 @@ namespace CPRISwitchSimulator
 
                 throw new Exception("Cell is allocated without being terminated in REC");
             }
-            private static List<(Capacity, uint)> GetShortestPathToRec(Cell cell)
+            private static List<(Capacity, uint)> GetShortestPathToRec(Cell cell, out string errorMessage)
             {
                 Console.WriteLine("GetShortestPathToRec() cell: " + cell.Id);
                 AxcContainerFormat format = cell.GetAxcContainerFormat();
                 uint containerCount = cell.GetReqAxcContainerCount();
+                Element lastAllocatableElement = null;
                 List<(Element head, List<(Capacity, uint)> path)> possiblePaths = new List<(Element, List<(Capacity, uint)>)>()
                 {
                     (cell.AttachedElement, new List<(Capacity, uint)>())
@@ -136,6 +139,8 @@ namespace CPRISwitchSimulator
                             {
                                 Console.WriteLine("GetShortestPathToRec() cell: " + cell.Id + " Add port: " + port.Name);
                                 path.Add((capacity, startContainer));
+                                
+                                errorMessage = null;
                                 return path;
                             }
                         }
@@ -154,6 +159,8 @@ namespace CPRISwitchSimulator
 
                                 visitedElements.Add(connectedElement);
                                 newPossiblePaths.Add((connectedElement, newPath));
+
+                                lastAllocatableElement = currentElement;
                             }
                         }
                     }
@@ -162,6 +169,11 @@ namespace CPRISwitchSimulator
                 }
 
                 Console.WriteLine("GetShortestPathToRec() No allocatable path found for cell: " + cell.Id);
+                if (lastAllocatableElement == null)
+                    errorMessage = "Insufficient resources on attached element";
+                else
+                    errorMessage = "Insufficient resources / no allocatable path found after element: " + lastAllocatableElement.Name;
+
                 return null;
             }
         }

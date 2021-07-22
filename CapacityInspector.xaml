@@ -33,8 +33,8 @@
                       VerticalScrollBarVisibility="Auto" Height="300" SelectionMode="Extended"
                       ItemsSource="{Binding Path=IndexedCapacityData}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Index" Width="100" Binding="{Binding Item1}"/>
-                    <DataGridTextColumn Header="Allocation reference" Width="150" IsReadOnly="True" Binding="{Binding Item2}" />
+                    <DataGridTextColumn Header="AxC Container No." Width="auto" IsReadOnly="True" Binding="{Binding Item1}"/>
+                    <DataGridTextColumn Header="Cell ID (AllocationRef)" Width="auto" IsReadOnly="True" Binding="{Binding Item2}" />
                 </DataGrid.Columns>
             </DataGrid>
 

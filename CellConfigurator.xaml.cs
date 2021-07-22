@@ -62,27 +62,35 @@ namespace CPRISwitchSimulator
                 _ = MessageBox.Show(exception.Message);
             }
         }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (ConfiguratorResult == Result.OK)
+            {
+                if (string.IsNullOrEmpty(CellName.Text) || !char.IsLetter(CellName.Text[0]))
+                {
+                    _ = MessageBox.Show("Invalid name!");
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (_configuratorVM.RatType == TopologyModel.RatType.NOT_SET)
+                {
+                    _ = MessageBox.Show("RAT type must be set!");
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (_configuratorVM.Bandwidth == TopologyModel.CarrierBandwidth.NOT_SET)
+                {
+                    _ = MessageBox.Show("Bandwidth must be set!");
+                    e.Cancel = true;
+                    return;
+                }
+            }
+        }
+
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(CellName.Text) || !char.IsLetter(CellName.Text[0]))
-            {
-                _ = MessageBox.Show("Invalid name!");
-                return;
-            }
-
-            if (_configuratorVM.RatType == TopologyModel.RatType.NOT_SET)
-            {
-                _ = MessageBox.Show("RAT type must be set!");
-                return;
-            }
-
-            if (_configuratorVM.Bandwidth == TopologyModel.CarrierBandwidth.NOT_SET)
-            {
-                _ = MessageBox.Show("Bandwidth must be set!");
-                return;
-            }
-
-            ConfiguratorResult = Result.OK;
             Close();
         }
         private void Button_Delete_Click(object sender, RoutedEventArgs e)

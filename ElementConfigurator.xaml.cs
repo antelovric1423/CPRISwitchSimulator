@@ -26,46 +26,55 @@ namespace CPRISwitchSimulator
             DataContext = _viewModel;
             ConfiguratorResult = Result.OK;
         }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (ConfiguratorResult == Result.OK)
+            {
+                if (string.IsNullOrEmpty(CpriElementName.Text) || !char.IsLetter(CpriElementName.Text[0]))
+                {
+                    _ = MessageBox.Show("Invalid element name!");
+                    e.Cancel = true;
+                    return;
+                }
+
+                List<TopologyModel.Port> connectorPorts = ElementGetPortsOfType(TopologyModel.PortType.CONNECTOR_PORT);
+
+                if (connectorPorts.Count == 0)
+                {
+                    _ = MessageBox.Show("Element must at least have 1 connector type port!");
+                    e.Cancel = true;
+                    return;
+                }
+
+                switch (_viewModel.Element.Type)
+                {
+                    case TopologyModel.ElementType.REC:
+                        List<TopologyModel.Port> processingPorts = ElementGetPortsOfType(TopologyModel.PortType.PROCESSING_PORT);
+
+                        if (processingPorts.Count == 0)
+                        {
+                            _ = MessageBox.Show("REC must at least have 1 processing type port!");
+                            e.Cancel = true;
+                            return;
+                        }
+                        break;
+                    case TopologyModel.ElementType.RE:
+                        break;
+                    case TopologyModel.ElementType.SWITCH:
+                        if (connectorPorts.Count < 2)
+                        {
+                            _ = MessageBox.Show("Switch must at least have 2 connector type ports!");
+                            e.Cancel = true;
+                            return;
+                        }
+                        break;
+                    default:
+                        throw new Exception("Invalid element type");
+                }
+            }
+        }
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(CpriElementName.Text) || !char.IsLetter(CpriElementName.Text[0]))
-            {
-                _ = MessageBox.Show("Invalid element name!");
-                return;
-            }
-
-            List<TopologyModel.Port> connectorPorts = ElementGetPortsOfType(TopologyModel.PortType.CONNECTOR_PORT);
-
-            if (connectorPorts.Count == 0)
-            {
-                _ = MessageBox.Show("Element must at least have 1 connector type port!");
-                return;
-            }
-
-            switch (_viewModel.Element.Type)
-            {
-                case TopologyModel.ElementType.REC:
-                    List<TopologyModel.Port> processingPorts = ElementGetPortsOfType(TopologyModel.PortType.PROCESSING_PORT);
-
-                    if (processingPorts.Count == 0)
-                    {
-                        _ = MessageBox.Show("REC must at least have 1 processing type port!");
-                        return;
-                    }
-                    break;
-                case TopologyModel.ElementType.RE:
-                    break;
-                case TopologyModel.ElementType.SWITCH:
-                    if (connectorPorts.Count < 2)
-                    {
-                        _ = MessageBox.Show("Switch must at least have 2 connector type ports!");
-                        return;
-                    }
-                    break;
-                default:
-                    throw new Exception("Invalid element type");
-            }
-
             ConfiguratorResult = Result.OK;
             Close();
         }

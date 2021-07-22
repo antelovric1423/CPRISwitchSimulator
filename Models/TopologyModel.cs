@@ -188,7 +188,7 @@ namespace CPRISwitchSimulator
 
             if (e.PropertyName == "RatType" || e.PropertyName == "Bandwidth")
             {
-                if (cell.State == CellState.ALLOCATED)
+                if (cell.State == CellState.ENABLED)
                     ResourceManager.DeallocateCellResources(cell);
 
                 ResourceManager.AllocateCellResources(cell);

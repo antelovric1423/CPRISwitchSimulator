@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +24,11 @@ namespace CPRISwitchSimulator
             DataContext = _viewModel;
             ConfiguratorResult = Result.OK;
         }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (_viewModel.Links.Count == 0)
+                ConfiguratorResult = Result.DELETE;
+        }
         private void Button_OK_Click(object sender, RoutedEventArgs e)
         {
             if (_viewModel.Links.Count == 0)
@@ -31,7 +37,6 @@ namespace CPRISwitchSimulator
                 return;
             }
 
-            ConfiguratorResult = Result.OK;
             Close();
         }
         private void Button_Delete_Click(object sender, RoutedEventArgs e)
@@ -46,7 +51,6 @@ namespace CPRISwitchSimulator
                 return;
             }
 
-            ConfiguratorResult = Result.DELETE;
             Close();
         }
         private void NewLinkAddButton_Click(object sender, RoutedEventArgs e)

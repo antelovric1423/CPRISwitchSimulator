@@ -10,16 +10,15 @@ namespace CPRISwitchSimulator
     {
         public CellConfiguratorViewModel(TopologyModel.Cell cell)
         {
-            _cell = cell;
+            Cell = cell;
         }
 
-        private TopologyModel.Cell _cell;
         public string Name
         {
-            get { return _cell.Name; }
+            get { return Cell.Name; }
             set
             {
-                _cell.Name = value;
+                Cell.Name = value;
                 OnPropertyChanged("Name");
             }
         }
@@ -33,21 +32,22 @@ namespace CPRISwitchSimulator
         }
         public TopologyModel.RatType RatType
         {
-            get { return _cell.RatType; }
+            get { return Cell.RatType; }
             set
             {
-                _cell.RatType = value;
+                Cell.RatType = value;
                 OnPropertyChanged("RatType");
             }
         }
         public TopologyModel.CarrierBandwidth Bandwidth
         {
-            get { return _cell.Bandwidth; }
+            get { return Cell.Bandwidth; }
             set
             {
-                _cell.Bandwidth = value;
+                Cell.Bandwidth = value;
                 OnPropertyChanged("Bandwidth");
             }
         }
+        public TopologyModel.Cell Cell { get; private set; }
     }
 }

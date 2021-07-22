@@ -8,7 +8,7 @@ namespace CPRISwitchSimulator
     {
         private static (string, TopologyModel.CarrierBandwidth)[] CarrierBandwidthTypeStringMap = new (string, TopologyModel.CarrierBandwidth)[]
            {
-            ("NOT_SET" , TopologyModel.CarrierBandwidth.NOT_SET),
+            ("N/A" , TopologyModel.CarrierBandwidth.NOT_SET),
             ("5 MHz" , TopologyModel.CarrierBandwidth.MHZ_5),
             ("10 MHz" , TopologyModel.CarrierBandwidth.MHZ_10),
             ("15 MHz" , TopologyModel.CarrierBandwidth.MHZ_15),

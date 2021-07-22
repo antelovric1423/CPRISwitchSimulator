@@ -7,9 +7,8 @@ namespace CPRISwitchSimulator
     {
         public enum CellState
         {
-            NOT_ATTACHED,
-            ALLOCATED,
-            ALLOCATION_FAILED
+            DISABLED,
+            ENABLED
         }
         public enum RatType
         {
@@ -36,7 +35,8 @@ namespace CPRISwitchSimulator
                 RatType = RatType.NOT_SET;
                 Bandwidth = CarrierBandwidth.NOT_SET;
                 AttachedElement = null;
-                State = CellState.NOT_ATTACHED;
+                State = CellState.DISABLED;
+                ErrorMessage = "Cell not attached to RE";
             }
             public AxcContainerFormat GetAxcContainerFormat()
             {
@@ -97,6 +97,7 @@ namespace CPRISwitchSimulator
             private CarrierBandwidth _bandwidth;
             private Element _attachedElement;
             private CellState _state;
+            private string _errorMessage;
             public uint Id
             {
                 get { return _id; }
@@ -151,6 +152,11 @@ namespace CPRISwitchSimulator
                         if (RatType == RatType.NOT_SET || Bandwidth == CarrierBandwidth.NOT_SET)
                             throw new ArgumentException("Cell can only be attached to element when RAT type and Bandwidth are set.");
                     }
+                    else
+                    {
+                        State = CellState.DISABLED;
+                        ErrorMessage = "Cell not attached to RE";
+                    }
 
                     _attachedElement = value;
                     OnPropertyChanged("AttachedElement");
@@ -163,6 +169,15 @@ namespace CPRISwitchSimulator
                 {
                     _state = value;
                     OnPropertyChanged("State");
+                }
+            }
+            public string ErrorMessage
+            {
+                get { return _errorMessage; }
+                set
+                {
+                    _errorMessage = value;
+                    OnPropertyChanged("ErrorMessage");
                 }
             }
         }
