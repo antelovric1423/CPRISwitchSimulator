@@ -1,0 +1,41 @@
+﻿<Window x:Class="CPRISwitchSimulator.CellConnectionConfigurator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CPRISwitchSimulator"
+        mc:Ignorable="d"
+        Title="CellConnectionConfigurator" Height="500" Width="500" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="1">
+            <TextBlock Margin="0">Cell: '</TextBlock>
+            <TextBlock Margin="0" Text="{Binding Path=CellVM.Cell.Name}"/>
+            <TextBlock Margin="0">' attached to element: '</TextBlock>
+            <TextBlock Margin="0" Text="{Binding Path=ElementVM.Element.Name}"/>
+            <TextBlock Margin="0">'.</TextBlock>
+        </StackPanel>
+        <Rectangle HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Height="1" Margin="5" Stroke="LightGray" Grid.Row="2" />
+
+        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <Button Margin="10" Click="Button_OK_Click">
+                <TextBlock VerticalAlignment="Center" Margin="10,0,10,0">OK</TextBlock>
+            </Button>
+            <Button Margin="10" Click="Button_Delete_Click">
+                <TextBlock VerticalAlignment="Center" Margin="10,0,10,0">Delete</TextBlock>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
