@@ -18,14 +18,10 @@
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" />
-                    <MenuItem Header="_Open" />
-                    <MenuItem Header="_Save" />
-                    <Separator />
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_Exit" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="_About" />
+                    <MenuItem Header="_About" Click="MenuItem_About_Click"/>
                 </MenuItem>
             </Menu>
             <StackPanel DockPanel.Dock="Left" Orientation="Vertical" Width="Auto" Background="LightCyan">

@@ -1,4 +1,5 @@
 ﻿using CPRISwitchSimulator.Helpers;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -74,6 +75,12 @@ namespace CPRISwitchSimulator
         }
         public CellConnectionViewModel CreateConnection(CellMainViewModel cellVM, ElementMainViewModel elementVM, double cellPosCorrection, double elementPosCorrection)
         {
+            foreach(CellConnectionViewModel cellConnectionVM in CellConnectionViewModels)
+            {
+                if(cellConnectionVM.CellVM == cellVM)
+                    throw new Exception("Cell is already attached to different element!");
+            }
+
             TopologyModel.AttachCell(cellVM.Cell, elementVM.Element);
             CellConnectionViewModel connection = new CellConnectionViewModel(cellVM, elementVM, cellPosCorrection, elementPosCorrection);
             CellConnectionViewModels.Add(connection);

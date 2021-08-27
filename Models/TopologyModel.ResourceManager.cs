@@ -24,8 +24,9 @@ namespace CPRISwitchSimulator
                 GetAllocatedPath(cell).ForEach((Action<Capacity>)(pathCapacity =>
                 {
                     pathCapacity.Deallocate(cell.Id);
-                    cell.State = CellState.DISABLED;
                 }));
+
+                cell.State = CellState.DISABLED;
             }
             public static void AllocateCellResources(Cell cell)
             {
@@ -172,7 +173,7 @@ namespace CPRISwitchSimulator
                 if (lastAllocatableElement == null)
                     errorMessage = "Insufficient resources on attached element";
                 else
-                    errorMessage = "Insufficient resources / no allocatable path found after element: " + lastAllocatableElement.Name;
+                    errorMessage = "Insufficient resources. No allocatable path found after element: " + lastAllocatableElement.Name;
 
                 return null;
             }

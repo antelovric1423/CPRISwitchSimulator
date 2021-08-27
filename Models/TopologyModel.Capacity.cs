@@ -11,6 +11,7 @@ namespace CPRISwitchSimulator
         {
             NOT_SET,
             FORMAT_20BIT,
+            FORMAT_24BIT,
             FORMAT_30BIT
         }
 
@@ -63,8 +64,7 @@ namespace CPRISwitchSimulator
                         throw new Exception("Invalid line rate for capacity initialization: " + lineRate);
                 }
 
-                if (_format == AxcContainerFormat.NOT_SET)
-                    InitializeAxcContainers();
+                InitializeAxcContainers();
             }
             public void Allocate(uint allocationRef, AxcContainerFormat format, uint noOfAxcContainers, uint startContainer)
             {
@@ -74,7 +74,7 @@ namespace CPRISwitchSimulator
 
                 Format = format;
 
-                if (startContainer + noOfAxcContainers >= AxcContainers.Length)
+                if (startContainer + noOfAxcContainers > AxcContainers.Length)
                     throw new ArgumentOutOfRangeException("Requested allocation of AxC containers is out of range");
 
                 for (uint i = startContainer; i < startContainer + noOfAxcContainers; i++)
@@ -164,10 +164,27 @@ namespace CPRISwitchSimulator
             }
             private void InitializeAxcContainers()
             {
+                uint bitCount;
+
                 if (_format == AxcContainerFormat.NOT_SET || _capacityBits == 0)
                     return;
 
-                AxcContainers = ArrayInitializator.InitializeArray<AxcContainer>(_capacityBits / 20);
+                switch(_format)
+                {
+                    case AxcContainerFormat.FORMAT_20BIT:
+                        bitCount = 20;
+                        break;
+                    case AxcContainerFormat.FORMAT_24BIT:
+                        bitCount = 24;
+                        break;
+                    case AxcContainerFormat.FORMAT_30BIT:
+                        bitCount = 30;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("Invalid value of _format: " + _format);
+                }
+
+                AxcContainers = ArrayInitializator.InitializeArray<AxcContainer>(_capacityBits / bitCount);
             }
             private uint GetAxcContainerCount(AxcContainerFormat format)
             {

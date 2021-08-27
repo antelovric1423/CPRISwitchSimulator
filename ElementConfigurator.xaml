@@ -65,7 +65,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name, Mode=TwoWay}"/>
                     <DataGridTextColumn Header="Type" Width="150" IsReadOnly="True" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Type" Width="150" IsReadOnly="True" Binding="{Binding MaxLineRate}" />
+                    <DataGridTextColumn Header="MaxLineRate" Width="150" IsReadOnly="True" Binding="{Binding MaxLineRate}" />
                     <DataGridTemplateColumn Header="Capacity">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

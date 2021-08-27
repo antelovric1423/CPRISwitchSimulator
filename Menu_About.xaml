@@ -1,0 +1,94 @@
+﻿<Window x:Class="CPRISwitchSimulator.Menu_About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CPRISwitchSimulator"
+        mc:Ignorable="d"
+        Title="Menu_About" Height="550" Width="800" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="750"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                <Bold>Elements</Bold> are added to work surface (right side) from toolbar (left side) 
+                by clicking on element in toolbar followed by a click on the work surface.
+                This will add a chosen element to the position specified by pointer, as well as open
+                a configurator window for that element.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                <Bold>Configurators</Bold> are specific to type of elements that are being added. 
+                Configurators can be accessed again by double-clicking on an element.
+                Each element has mandatory parameters that must be assigned values before 
+                they can be added to work surface. For example: REC must have 
+                1 processing and 1 connector port.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                Elements can be <Bold>connected</Bold> by clicking on connector from toolbar and clicking on each
+                of the 2 elements that the user wants to connect. Based on elements that are clicked,
+                the application will create appropriate connection and open a configurator for that 
+                connection.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                After connections between elements are configured and the cells are attached, resource allocation
+                starts and the amount of resources that is allocated over CPRI link path depends on cell configuration
+                If there is no path to REC or there are no available resources on the existing paths toward REC 
+                Cell is DISABLED. Each time a link or port is added to topology configuration of DISABLED cells is
+                attempted.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                Core network element does not impact functioning of the application in any way and is not necessary to 
+                start simulation of CPRI resources.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                Elements can be deleted only through configurators.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                Changes made to topology are not reversible.
+            </TextBlock>
+            <TextBlock/>
+            <TextBlock Height="auto" TextWrapping="Wrap">
+                This application does not take into account limitations of radio units 
+                (number of antenna ports and supported bandwidth).
+                The only limitation for maximum capacity is CPRI link line rate configurated by user.
+                In case user wishes realistic simulation, it is necessary to take into account limitation of actual 
+                radios and configure cells accordingly.
+            </TextBlock>
+
+
+            <TextBlock/>
+            <Rectangle HorizontalAlignment="Stretch" Height="1" Margin="5" Stroke="LightGray"/>
+            <TextBlock/>
+            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Opacity="0.93">
+                This application is part of a Masters degree thesis in Computing 
+                on subject of CPRI resource simulation.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Opacity="0.93" Text="Project can be found on Github: "/>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://github.com/antelovric1423/CPRISwitchSimulator">
+                        antelovric1423/CPRISwitchSimulator
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Center" Opacity="0.93" FontStyle="Italic">
+                Ante Lovrić, FESB, 2021
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -25,6 +25,16 @@ namespace CPRISwitchSimulator
             DataContext = viewModel;
             Console.WriteLine(CanvasMain.Name);
         }
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void MenuItem_About_Click(object sender, RoutedEventArgs e)
+        {
+            Menu_About aboutMenu = new Menu_About();
+
+            _ = aboutMenu.ShowDialog();
+        }
         private void ResetValues()
         {
             pickedVM = null;
@@ -432,5 +442,6 @@ namespace CPRISwitchSimulator
         private readonly double elementImgDimensions = 60;
         private readonly double cellImgDimensions = 50;
         private readonly double cloudImgDimensions = 80;
+
     }
 }

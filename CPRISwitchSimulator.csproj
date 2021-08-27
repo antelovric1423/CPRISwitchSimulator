@@ -118,6 +118,9 @@
     <Compile Include="Helpers\ArrayInitializator.cs" />
     <Compile Include="Helpers\CarrierBandwidthStringConverter.cs" />
     <Compile Include="Helpers\NotifierBase.cs" />
+    <Compile Include="Menu_About.xaml.cs">
+      <DependentUpon>Menu_About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\TopologyModel.Capacity.cs" />
     <Compile Include="Models\TopologyModel.ConnectorPort.cs" />
     <Compile Include="Models\TopologyModel.Cell.cs" />
@@ -185,6 +188,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Menu_About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

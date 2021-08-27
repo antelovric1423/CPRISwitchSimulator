@@ -53,14 +53,6 @@ namespace CPRISwitchSimulator
                 _ = Ports.Remove(port);
                 OnPropertyChanged("Ports");
             }
-            public Port GetPort(string name)
-            {
-                foreach (var it in Ports)
-                    if (it.Name == name)
-                        return it;
-
-                throw new InvalidOperationException("ERROR: Could not find port with name: " + name + "!");
-            }
             public List<Link> GetLinksTowardElement(Element element)
             {
                 List<Link> links = new List<Link>();
